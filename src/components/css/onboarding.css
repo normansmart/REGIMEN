@@ -1,0 +1,111 @@
+
+.onboarding-container{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+form{
+    width: 500px;
+ 
+}
+
+
+.group-form-input{
+    width: 60%;
+    margin-top: 20px;
+}
+
+
+.onboard-screen{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+   
+ 
+}
+
+
+#ob1{
+    z-index: 30;
+}
+
+#ob2{
+    z-index: 29;
+}
+
+
+#ob3{
+    z-index: 28;
+}
+
+.theme-name{
+    width: 100%;
+    text-align: left;
+    text-indent: 15%;
+    font-size: 70px;
+    font-weight: 400;
+    margin-top: 3%;
+}
+
+.theme-container{
+    width: 80%;
+   
+    display: flex;
+    justify-content: center;
+   flex-wrap: wrap;
+    margin: auto;
+    margin-top: 30px;
+
+ 
+
+}
+
+
+.theme-container h3{
+width: 100%;
+
+
+}
+
+
+.setting-background{
+    width: 150px;
+    height: 150px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.323);
+
+    margin: 10px;
+}
+
+
+.setting-color{
+    width: 90px;
+    height: 90px;
+    border-radius: 500px;
+    margin: auto;
+}
+
+.get-started{
+    width: 20%;
+    height: 50px;
+    border-radius: 100px;
+    background-color: #38383A;
+    color: #FFF9F2;
+    margin: 20px;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+.get-started:hover{
+    color: #38383A;
+    background-color: #FFFBF6;
+}

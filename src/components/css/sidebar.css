@@ -1,0 +1,245 @@
+.side-bar-container{
+
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    transition: opacity .1s;
+   
+    
+}
+
+
+
+
+#toggle-on{
+opacity: 1;
+z-index: 4;
+}
+
+
+#toggle-off{
+ opacity: 0;
+z-index: -4;
+}
+
+#slide-on{
+    left: 0px;
+}
+
+#slide-off{
+    left: -550px;
+}
+
+
+
+
+
+
+
+
+.side-bar-cover{
+    display: block;
+    position: relative;
+    z-index: -6;
+    width: 100%;
+    height: 100%;
+    background-color:  rgba(21, 21, 21, 0.312);
+    backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+
+.side-bar{
+    width: 550px;
+    height: 100%;
+    position:absolute;
+  
+  
+ 
+    transition: left .2s;
+}
+
+.side-bar h1{
+    width: 100%;
+    font-size: 60px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0%;
+    
+   
+}
+
+.side-bar h2{
+    font-size: 30px;
+    font-weight: 900;
+}
+
+
+.project-specs{
+    width: 100%;
+
+    display: flex;
+
+}
+
+.project-lang{
+  width: 30%;
+  height: 60px;
+  margin-left: 1.66%;
+
+
+    border: .5px solid #28272544;
+    border-radius: 5px;
+}
+
+.project-lang h3{
+    margin: 0;
+    margin-top: 10px;
+
+    }
+
+
+.project-lang h4{
+margin: 0;
+font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+#new-commit{
+    width: 90%;
+    height: 60px;
+    background: none;
+    border: 1px solid #38383a79;
+ 
+    border-radius: 5px;
+    
+    font-size: 25px;
+    font-weight: 400px;
+   
+
+}
+
+
+.commit-card-container{
+    width: 100%;
+  
+}
+
+.syntax-card{
+    width: 80%;
+  
+    margin: auto;
+
+   margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 7px;
+
+}
+
+.syntax-card h3{
+width: 60%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+
+}
+
+.syntax-card h4{
+    width: 20%;
+    margin: 0;
+ padding-top: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    border-right: 1px solid black;
+    letter-spacing: -.5px;
+  
+}
+
+.commit-display{
+    height: 80%;
+  
+   overflow: hidden;
+}
+
+.highlighter{
+    width: 100%;
+    height: 170px;
+  
+    text-align: left;
+    text-indent: 7px;
+   
+overflow-y: hidden;
+margin: 0;
+padding: 0;
+
+ 
+}
+
+.commit-button-container{
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+
+  
+}
+
+.commit-button{
+    width: 50%;
+ border: none;
+ background: none;
+text-align: center;
+
+color: white;
+font-size: 16px;
+font-weight: 500;
+
+cursor: pointer;
+ 
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#delete{
+    background-color: #A56262;
+}
+
+#edit{
+    width: 100%;
+    background-color: #e3b380f8;
+}
+.link{
+    width: 50%;
+  }
+
+.commit-icon{
+    width: 35px;
+    height: 35px;
+    border:  1.5px solid rgb(255, 255, 255);
+  border-radius: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+}
+
+.commit-button img{
+   width: 65%;
+margin: 0px;
+  
+}
