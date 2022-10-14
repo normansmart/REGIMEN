@@ -64,14 +64,12 @@ const allUsers = selectedProject.users
 
                 </div>
 
-
                 <Link to='/declaration'>     <button id="new-commit"> Add New Commit </button> </Link>
 
                 <div className="">
                     <h3> Declarations </h3>
                     <h3> Collaborators </h3>
                 </div>
-
 
                 <div className="commit-card-container">
 
@@ -81,15 +79,7 @@ const allUsers = selectedProject.users
             
             </div>
 
-
             <div className="side-bar-cover" onClick={()=> switcher()} >
-
-
-              
-
-
-
-
 
             </div>
 

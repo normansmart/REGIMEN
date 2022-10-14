@@ -25,6 +25,7 @@ console.log(currentLang)
           <option> html </option>
           <option> javascript </option>
         </select>
+        <button id="button"> DECLARE </button>
 
         <CodeEditor
           value={commitEdit ? commitEdit.commit : code}
@@ -44,7 +45,7 @@ console.log(currentLang)
 
 
 
-        <button id="button"> DECLARE </button>
+    
 
       </form>
 

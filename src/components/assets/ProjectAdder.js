@@ -3,15 +3,6 @@ import ProjectAddForm from "./ProjectAddForm";
 
 function ProjectCreate({ groups, post , toggle , switcher }) {
 
-
-  
-
-
-
-
-
-
-
     return (
 
         <div className="project-add-container" id={toggle ? "toggle-on" : "toggle-off"} >

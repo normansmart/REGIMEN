@@ -1,31 +1,30 @@
-.commit-add{
-    width: 90%;
+.commit-add {
+    width: 100%;
     margin: auto;
-    height: calc(100vh - 120px);
-  
+    height: calc(100vh - 10px);
+
     z-index: 100;
- 
+
 }
 
-select{
+select {
     width: 200px;
     height: 30px;
-  
 }
 
 
 
-.commit-box{
-    width: 80%;
-    height:70%;
-    margin: auto;
-   background-color: #343447;
-   color: white;
-   overflow-y: scroll;
+.commit-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #343447;
+    color: white;
+    overflow-y: scroll;
     scroll-behavior: smooth;
 }
 
-#button{
+#button {
     width: 30%;
     height: 40px;
     border: none;
@@ -34,5 +33,3 @@ select{
 
     font-size: 16px;
 }
-
-

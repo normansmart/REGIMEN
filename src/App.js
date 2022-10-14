@@ -28,22 +28,13 @@ function App() {
   const [userCommits, setUserCommits] = useState([])
   const [userColleagues, setUserColleagues] = useState([])
   
-
   const [signUpShow , setSignUpShow] = useState(false)
   const [signInShow , setSignInShow] = useState(true)
-
-
-
-
-
 
   const [onBoardGroupShow, setOnBoardGroupShow] = useState(true)
   const [onBoardProjectShow, setOnBoardProjectShow] = useState(true)
   const [onBoardThemeSelect, setOnBoardThemeSelect] = useState(true)
   const [onBoarded, setOnBoarded] = useState(false)
-
-
-
 
   const [userSettings, setUserSettings] = useState({
     user_id:currentUserId,
@@ -60,17 +51,8 @@ function App() {
   const [selectedProject, setSelectedProject] = useState({})
   const [commits, setCommits] = useState([])
   const [editCommit, setEditCommit] = useState(null)
-
-
-
   const [sideBarShow, setSideBarShow] = useState(false)
-
-
-
-
   const [currentLang, setCurrentLang] = useState("")
-
-
   const [newProjectShow, setNewProjectShow] = useState(false)
 
   function showProjectForm() {
@@ -163,7 +145,7 @@ function App() {
       },
       body: JSON.stringify(
         {
-          cohort_id: 1 ,
+          cohort_id: userCohorts[0].id,
           project_id: project.id,
           user_id: currentUserId,
         }
@@ -176,6 +158,60 @@ function App() {
 
       })
 
+  }
+
+
+
+  function assignNewProject(project , group){
+
+    console.log(project)
+    fetch("/assignments", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          cohort_id: group,
+          project_id: project.id,
+          user_id: currentUserId,
+        }
+      )
+    }
+    ).then(r => r.json())
+      .then(i => {
+        console.log(i)
+        refresh()
+
+      })
+
+  }
+
+
+  function createNewProject(e, group){
+    e.preventDefault();
+    fetch("/projects", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          name: e.target.name.value,
+          description: e.target.description.value,
+          key: e.target.key.value,
+          front_lang: e.target.front_lang.value,
+          back_lang: e.target.back_lang.value,
+          private: e.target.private.value
+        }
+      )
+    }
+    ).then(r => r.json())
+      .then(i => {
+        assignNewProject(i , group)
+      })
   }
 
 
@@ -196,7 +232,6 @@ function App() {
           front_lang: e.target.front_lang.value,
           back_lang: e.target.back_lang.value,
           private: e.target.private.value
-
         }
       )
     }
@@ -204,11 +239,7 @@ function App() {
       .then(i => {
         assignProject(i)
         setOnBoardProjectShow(false)
-
       })
-
-
-
 
   }
 
@@ -268,14 +299,6 @@ function App() {
   }
 
 
-
-
-
-
-
-
-
-
   //EDIT selected commit
 
   function handleEditCommit(commit) {
@@ -326,12 +349,6 @@ function App() {
   }
 
 
-
-
-
-
-
-
   //DELETE commit from specified selected commit
   function handleDelete(commit) {
     console.log(commit.id)
@@ -347,10 +364,6 @@ function App() {
     console.log(updatedItems)
     setCommits(updatedItems);
   }
-
-
-
-
 
 
   function sidebarSetter(item) {
@@ -373,12 +386,6 @@ function App() {
     console.log(currentLang)
 
   }
-
-
-
-
-
-
 
 
   function onBoardGroupAdd(e) {
@@ -411,9 +418,10 @@ function App() {
       })
   }
 
+
   function addMembership(group) {
 
-    console.log("memberassigned")
+    console.log("member assigned")
     fetch("/memberships", {
       method: 'POST',
       headers: {
@@ -424,24 +432,14 @@ function App() {
         {
           user_id: user.id,
           cohort_id: group.id
-
         }
       )
     }
     ).then(r => r.json())
       .then(i => {
-     
-      
         refresh()
-       
-
       })
   }
-
-
- 
-
-
 
   function themeSetter(theme){
    
@@ -468,9 +466,6 @@ function App() {
 
 
   function themeSelect(theme){
-
-  
- 
     fetch(`/settings/${userSettings.id}`, {
       method: 'PATCH',
       headers: {
@@ -484,8 +479,6 @@ function App() {
           color: theme.color,
           font: theme.font,
         }
-    
-        
       )
     }
     ).then(r => r.json())
@@ -526,16 +519,12 @@ console.log(user)
     ).then(r => r.json())
     .then(t =>{
  
-    
     console.log(t)
 
     setOnBoarded(true)
-    
-   
-    })
-    
- 
 
+    })
+  
   }
 
 
@@ -568,33 +557,21 @@ function logout() {
           <GroupAddForm onboardGroup={onBoardGroupAdd} />
         </div>
 
-
         <div className='onboard-screen' id='ob2' style={onBoardProjectShow ? { display: "flex", backgroundColor:userSettings.backgroundcolor } : { display: "none" } }>
           <ProjectAddForm post={createProject} groups={userCohorts} />
-
         </div>
 
         <div className='onboard-screen' id='ob3' style={onBoardThemeSelect ? { display: "block", backgroundColor:"#FFF9F2" } : { display: "none" }} >
           <Settings themeSelect={themeSetter} userid={currentUserId ? currentUserId : console.log("no user active")} currentTheme={userSettings} style={onBoardProjectShow ? { display: "flex", backgroundColor:userSettings.backgroundcolor } : { display: "none" }} id="obj3-L" />
-
           <button className='get-started' onClick={()=> finishOnboard()}> Get Started </button>
         </div>
 
-
       </div>
-
-
 
       <Login onLogin={onLogin} currentUserId={currentUserId} setTheme={themeSetter} themeDefault={userSettings} setSignUp={showSignUp} showSignIn={signInShow} />
       <SignUp onLogin={onLogin} currentUserId={currentUserId} setTheme={themeSetter} themeDefault={userSettings} setShow={signUpShow} hide={hideSignUp} />
 
-   
-
       <Router>
-
-
-
-
 
         <div className='navigation-container'>
           <UserTab user={user} myprojects={userProjects} mycohorts={userCohorts} mycommits={userCommits} mycolleagues={userColleagues} />
@@ -615,29 +592,20 @@ function logout() {
               deleter={handleDelete}
               setLang={setLanguage}
               currentLang={currentLang}
-
               groups={userCohorts}
-              post={createProject}
+              post={createNewProject}
               newProject={showProjectForm}
               newPShowToggle={newProjectShow}
-
               theme={userSettings}
-
             />
           } />
-
-
-
 
           <Route path="/declaration" element={
             <CommitField declare={addCommit}
               setLang={setLanguage}
               currentLang={currentLang}
               selectedProject={selectedProject}
-
             />} />
-
-
 
           <Route path='/commitedit' element={
             <CommitField
@@ -647,20 +615,13 @@ function logout() {
               currentLang={currentLang}
               selectedProject={selectedProject}
               commitEdit={editCommit}
-            />} />
+            />} 
+            />
 
-
-
-            <Route path='/settings' element={ <Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
+            <Route path='/settings' element={ <Settings themeSelect={themeSetter} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
 
         </Routes>
       </Router>
-
-   
-
-
-
-
 
     </div>
   );
