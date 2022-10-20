@@ -33,18 +33,18 @@ form{
 }
 
 input{
-    width: 30%;
+    width: 50%;
     height: 40px;
     border: none;
     border-bottom: 3px solid #38383a63;
     outline: none;
-
+    background-color: rgba(255, 255, 255, 0);
     font-size: 16px;
 }
 
 
 #sign-in-button{
-    width: 30%;
+    width: 50%;
     height: 50px;
     border-radius: 100px;
     background-color: #38383A;
@@ -72,18 +72,16 @@ input{
     cursor: pointer;
 }
 
-
-
-
-
+#passwordToggle{
+    width: 5%;
+    height: 20px;
+}
 
 
 @media screen and (max-width: 600px) {
 
-
     .login {
         width: 100%;
-     
     }
 
 

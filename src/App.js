@@ -19,23 +19,17 @@ import CommitField from './components/assets/CommitAdder';
 
 function App() {
 
-  //User info
-  const [currentUserId, setCurrentUserId] = useState(null)
-  const [themeId , setThemeId] = useState(null)
-  const [user, setUser] = useState({})
-  const [userProjects, setUserProjects] = useState([])
-  const [userCohorts, setUserCohorts] = useState([])
-  const [userCommits, setUserCommits] = useState([])
-  const [userColleagues, setUserColleagues] = useState([])
   
+  const [currentUserId, setCurrentUserId] = useState(null)
+  //Show login or sign up screen
   const [signUpShow , setSignUpShow] = useState(false)
   const [signInShow , setSignInShow] = useState(true)
 
+  //
   const [onBoardGroupShow, setOnBoardGroupShow] = useState(true)
   const [onBoardProjectShow, setOnBoardProjectShow] = useState(true)
   const [onBoardThemeSelect, setOnBoardThemeSelect] = useState(true)
   const [onBoarded, setOnBoarded] = useState(false)
-
   const [userSettings, setUserSettings] = useState({
     user_id:currentUserId,
     backgroundcolor: "#FFF9F2" , 
@@ -55,30 +49,15 @@ function App() {
   const [currentLang, setCurrentLang] = useState("")
   const [newProjectShow, setNewProjectShow] = useState(false)
 
-  function showProjectForm() {
-    setNewProjectShow(!newProjectShow)
-  }
 
 
-  // useEffect(() => {
-  //   fetch("/me")
-  //     .then(r => r.json())
-  //     .then(user => {
-  //       if(user.id){
-  //         const myProjects = user.projects
-  //         const myCohorts = user.cohorts
-  //         const myCommits = user.commits
-  //         const myColleagues = user.friends
+//User login and tab information
 
-  //         setUser(user)
-  //         setUserProjects(myProjects)
-  //         setUserCohorts(myCohorts)
-  //         setUserCommits(myCommits)
-  //         setUserColleagues(myColleagues)
-  //       }
-
-  //     })
-  // }, [])
+  const [user, setUser] = useState({})
+  const [userProjects, setUserProjects] = useState([])
+  const [userCohorts, setUserCohorts] = useState([])
+  const [userCommits, setUserCommits] = useState([])
+  const [userColleagues, setUserColleagues] = useState([])
 
   function onLogin(userId) {
     setCurrentUserId(userId)
@@ -106,6 +85,35 @@ function App() {
 
   }
 
+
+
+
+  function showProjectForm() {
+    setNewProjectShow(!newProjectShow)
+  }
+
+
+  // useEffect(() => {
+  //   fetch("/me")
+  //     .then(r => r.json())
+  //     .then(user => {
+  //       if(user.id){
+  //         const myProjects = user.projects
+  //         const myCohorts = user.cohorts
+  //         const myCommits = user.commits
+  //         const myColleagues = user.friends
+
+  //         setUser(user)
+  //         setUserProjects(myProjects)
+  //         setUserCohorts(myCohorts)
+  //         setUserCommits(myCommits)
+  //         setUserColleagues(myColleagues)
+  //       }
+
+  //     })
+  // }, [])
+
+ 
   
  
 
@@ -492,7 +500,6 @@ function App() {
 
   }
 
-console.log(user)
 
   function finishOnboard(){
     setOnBoardThemeSelect(false)
