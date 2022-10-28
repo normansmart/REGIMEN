@@ -50,7 +50,7 @@ input{
     background-color: #38383A;
     color: #FFF9F2;
     margin: 20px;
-    transition: background-color .3s;
+    transition: background-color .2s;
     cursor: pointer;
 }
 
@@ -62,14 +62,19 @@ input{
 
 
 #sign-up-button{
-    width: 30%;
+    width: 25%;
     height: 50px;
     border-radius: 100px;
     background-color: #FFF9F2;
     color: #38383A;
     margin: 0px;
-    transition: background-color .3s;
+    transition: background-color .2s;
     cursor: pointer;
+}
+
+#sign-up-button:hover{
+    color: #FFFBF6;
+    background-color: #38383A;
 }
 
 #passwordToggle{
@@ -84,8 +89,6 @@ input{
         width: 100%;
     }
 
-
-
     .logo {
         width: 25%;
     }
@@ -95,8 +98,6 @@ input{
         margin-top: 0px;
         font-weight: 500;
     }
-
-
 
     input {
         width: 80%;
@@ -115,15 +116,10 @@ input{
     form button {
         width: 80%;
         height: 50px;
-
-
-
         border: 2px solid #38383a;
         border-radius: 100px;
-
         cursor: pointer;
         transition: background-color .5s;
-
     }
 
 

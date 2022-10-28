@@ -22,7 +22,9 @@ const Dashboard = ({
     currentLang,
     newProject,
     newPShowToggle,
-    theme
+    theme,
+    groupSelect,
+    setGroupSelect
 
 }) => {
 
@@ -51,10 +53,8 @@ const Dashboard = ({
 
 
             <div className="project-tab-container">
-
                 <ProjectList projects={projects} sideSelect={sideSelect} />
-
-                <ProjectCreate groups={groups} post={post} switcher={newProject} toggle={newPShowToggle} />
+                <ProjectCreate groups={groups} post={post} switcher={newProject} toggle={newPShowToggle} groupSelect={groupSelect} setGroupSelect={setGroupSelect} />
             </div>
 
 
@@ -67,9 +67,7 @@ const Dashboard = ({
                 deleter={deleter}
                 editer={editer}
                 currentLang={currentLang}
-
                 theme={theme}
-                
             />
         </div>
     )

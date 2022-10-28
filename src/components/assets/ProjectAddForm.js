@@ -2,22 +2,26 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 // Function to add new projects to backend. Takes the createNewProject function, display switcher and groups array as parameters.
-function ProjectAddForm({ post, switcher, groups }) {
+function ProjectAddForm({ post, switcher, groups , groupSelect , setGroupSelect}) {
+
 
 //useState for chosen group id
-    const [groupSelect, setGroupSelect] = useState(0)
+ 
 
 //on page load, console log. if user logs in, sets state to first group id
-    useEffect( () => {
-        if(groups[0]){
-            const firstGroup = groups[0].id
-            setGroupSelect(firstGroup)
-        }
-        else{
-            console.log("no group chosen")
-        }
+    // useEffect( () => {
+    //     if(groups[0]){
+    //         const firstGroup = groups[0].id
+    //         setGroupSelect(firstGroup)
+    //         console.log(groupSelect)
+    //     }
+    //     else{
+    //         console.log("no group chosen")
+    //     }
        
-    } , [])
+    // } , [])
+
+    console.log(groupSelect)
 
     //runs a fetch(get) to cohorts and filters array to give group that matches user selection and sets state to group id
     function groupselector(e) {
@@ -31,10 +35,8 @@ function ProjectAddForm({ post, switcher, groups }) {
                 setGroupSelect(groupId)
 
             })
-
     }
   
-
     //maps across user cohorts and creates an option tag for each group the user is a member of
     const groupOptions = groups.map(
         item => {
@@ -43,7 +45,6 @@ function ProjectAddForm({ post, switcher, groups }) {
             )
         }
     )
-
 
     return (
         // on submit trigger createNewProject function in App.js. Event parameters: Group name, project name, project key, description, languages and privacy

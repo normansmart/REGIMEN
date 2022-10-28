@@ -3,14 +3,7 @@ import { useState } from "react";
 
 const Settings = ({userid , themeSelect , currentTheme}) =>{
 
-
-
-console.log(userid)
-
-
-
     const themeName = (currentTheme)=>{
-
 
         if(currentTheme.font == "Mulish"){
             return "REGIMEN"
@@ -30,9 +23,6 @@ console.log(userid)
             return "SOVREIGN"
         }
     }
-
-
-
 
    const themesLight = [
     {
@@ -99,13 +89,6 @@ const themesDark = [
 
     }
 ]
-
-
-
-
-
-
-
 
    const themeOptionsLight = themesLight.map(
     item =>{

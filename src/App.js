@@ -48,7 +48,7 @@ function App() {
   const [sideBarShow, setSideBarShow] = useState(false)
   const [currentLang, setCurrentLang] = useState("")
   const [newProjectShow, setNewProjectShow] = useState(false)
-
+  const [groupSelect, setGroupSelect] = useState(0)
 
 
 //User login and tab information
@@ -69,9 +69,10 @@ function App() {
         const myProjects = user.projects
         const myCohorts = user.cohorts
         const myCommits = user.commits
+        const myTheme = user.setting
         const myColleagues = user.friends
         const onBoarded = user.onboarded
-        
+        const groupSelectorDefault = myCohorts[0].id
 
         setUser(user)
         setUserProjects(myProjects)
@@ -79,12 +80,13 @@ function App() {
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
         setOnBoarded(onBoarded)
-      
-     
+        setGroupSelect(groupSelectorDefault)
+        setUserSettings(myTheme)
+        refresh()
       })
-
   }
 
+  console.log(userSettings)
 
 
 
@@ -133,9 +135,10 @@ function App() {
         setUserCohorts(myCohorts)
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
-       if(myTheme){
-        setUserSettings(myTheme)
-       }
+      //  if(myTheme){
+      //   setUserSettings(myTheme)
+      //  }
+      setUserSettings(myTheme)
 
       })
 
@@ -198,6 +201,7 @@ function App() {
 
 
   function createNewProject(e, group){
+    console.log(group)
     e.preventDefault();
     fetch("/projects", {
       method: 'POST',
@@ -221,6 +225,12 @@ function App() {
         assignNewProject(i , group)
       })
   }
+
+  //  useEffect( () => {
+  //      refresh()
+       
+  //   } , [])
+
 
 
   function createProject(e) {
@@ -467,13 +477,13 @@ function App() {
     .then(r => r.json())
     .then(t =>{
       setUserSettings(t)
-
-     
     })
   }
 
 
   function themeSelect(theme){
+    console.log(userSettings)
+    
     fetch(`/settings/${userSettings.id}`, {
       method: 'PATCH',
       headers: {
@@ -604,6 +614,8 @@ function logout() {
               newProject={showProjectForm}
               newPShowToggle={newProjectShow}
               theme={userSettings}
+              groupSelect={groupSelect}
+              setGroupSelect={setGroupSelect}
             />
           } />
 
@@ -625,7 +637,7 @@ function logout() {
             />} 
             />
 
-            <Route path='/settings' element={ <Settings themeSelect={themeSetter} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
+            <Route path='/settings' element={ <Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
 
         </Routes>
       </Router>
