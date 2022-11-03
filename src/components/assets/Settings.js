@@ -124,8 +124,8 @@ const themesDark = [
 
 
     return(
-<div >
-    <h1 style={{margin:"0px"}}> Choose Your Theme </h1>
+<div style={{marginTop:"120px"}} >
+    <h1 style={{paddingTop:"20px"}}> Choose Your Theme </h1>
     <h1 className="theme-name"> {themeName(currentTheme)} </h1>
 
         <div className="theme-container"> 

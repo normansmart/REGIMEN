@@ -1,5 +1,5 @@
 .user-tab {
-    width: 50%;
+
     height: 100%;
 
     display: flex;
@@ -23,8 +23,8 @@
 
 
 .user-tab h1 {
-    font-size: 28px;
-    font-weight: 700;
+    width: 30%;
+    height: auto;
     letter-spacing: 1px;
     margin: 0;
 }
@@ -45,19 +45,18 @@
 
 
 .user-icon h2 {
-    margin-left: 35%;
     font-size: 27px;
     font-weight: 400;
     margin: 0;
-    margin-bottom: 0;
+  
     border-radius: 5px;
-    box-shadow: inset 0px 0px 6px #38383a45;
+    box-shadow: inset 0px 0px 6px #38383a83;
 }
 
 
 .user-icon p {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 00;
     margin-top: 10px;
     margin-bottom: 0;
 }

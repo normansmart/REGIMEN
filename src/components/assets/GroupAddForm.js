@@ -4,9 +4,6 @@ import React from "react";
 
 function GroupAddForm({onboardGroup}){
 
-
-
-
     return(
         
         <form onSubmit={(e)=> onboardGroup(e)}>
@@ -15,9 +12,7 @@ function GroupAddForm({onboardGroup}){
            <input className="group-form-input" type="text" name="tag" placeholder="TAG" /> <br/>
            <input className="group-form-input" type="text" name="message" placeholder="Tagline" /><br/>
            <input className="group-form-input" type="text" name="join_key" placeholder="join_key" /><br/>
-
            
-
            <button type="submit" id="project-add-button"> Start </button>
 
         </form>

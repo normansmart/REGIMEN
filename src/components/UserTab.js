@@ -1,7 +1,7 @@
 import React from "react";
 import './css/usertab.css'
 
-const UserTab = ({ user, myprojects, mycohorts, mycommits, mycolleagues }) => {
+const UserTab = ({ user, myprojects, mycohorts, mycommits, mycolleagues , width , h2Size}) => {
 
 
     const projectNum = myprojects.length
@@ -43,19 +43,10 @@ const UserTab = ({ user, myprojects, mycohorts, mycommits, mycolleagues }) => {
         }
     }
 
-
-
-
     let image = require('./images/logo.png')
 
-
-
-
-
     return (
-        <div className="user-tab">
-
-
+        <div className="user-tab" style={{width: width}}>
 
             <div className="user-info-container" >
 
@@ -63,10 +54,11 @@ const UserTab = ({ user, myprojects, mycohorts, mycommits, mycolleagues }) => {
                 <img src={image} />
                 </div> */}
 
-                <h1> {user.username} </h1>
+                <h1 style={{fontSize: h2Size}}> {user.username} </h1>
 
+                
                 <div className="user-icon">
-                    <h2> {projectNum} </h2>
+                    <h2 style={{boxShadow:""}} > {projectNum} </h2>
                     <p> {projectTitle(projectNum)} </p>
                 </div>
 

@@ -1,232 +1,216 @@
-.side-bar-container{
+.side-bar-container {
 
     width: 100%;
     height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 4;
+    z-index:99;
     transition: opacity .1s;
-   
-    
+}
+
+#toggle-on {
+    opacity: 1;
+    z-index: 4;
 }
 
 
-
-
-#toggle-on{
-opacity: 1;
-z-index: 4;
+#toggle-off {
+    opacity: 0;
+    z-index: -4;
 }
 
-
-#toggle-off{
- opacity: 0;
-z-index: -4;
-}
-
-#slide-on{
+#slide-on {
     left: 0px;
 }
 
-#slide-off{
+#slide-off {
     left: -550px;
 }
 
-
-
-
-
-
-
-
-.side-bar-cover{
+.side-bar-cover {
     display: block;
     position: relative;
     z-index: -6;
     width: 100%;
     height: 100%;
-    background-color:  rgba(21, 21, 21, 0.312);
+    background-color: rgba(21, 21, 21, 0.312);
     backdrop-filter: blur(4px);
-  cursor: pointer;
+    cursor: pointer;
 }
 
 
-.side-bar{
+.side-bar {
     width: 550px;
     height: 100%;
-    position:absolute;
-  
-  
- 
+    position: absolute;
     transition: left .2s;
+    overflow: auto;
 }
 
-.side-bar h1{
+.side-bar-header{
+    width: 550px;
+    height: 360px;
+    position: fixed;
+}
+.side-bar h1 {
     width: 100%;
-    font-size: 60px;
-    font-weight: 800;
+    font-size: 45px;
+    font-weight: 300;
     letter-spacing: 2px;
-    margin: 0%;
-    
-   
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
-.side-bar h2{
-    font-size: 30px;
+.side-bar h2 {
+    font-size: 20px;
     font-weight: 900;
+    margin: 0;
 }
 
+span {
+    font-size: 18px;
+    font-weight: 500;
+}
 
-.project-specs{
+.side-bar p{
+ margin-top: 0;
+}
+
+.project-specs {
     width: 100%;
-
     display: flex;
-
 }
 
-.project-lang{
-  width: 30%;
-  height: 60px;
-  margin-left: 1.66%;
-
-
+.project-lang {
+    width: 25%;
+    height: 60px;
+    margin-left: 5.33%;
     border: .5px solid #28272544;
     border-radius: 5px;
 }
 
-.project-lang h3{
+.project-lang h3 {
     margin: 0;
-    margin-top: 10px;
+    margin-top: 7px;
 
-    }
+}
 
-
-.project-lang h4{
-margin: 0;
-font-weight: 500;
+.project-lang h4 {
+    margin: 0;
+    margin-top: 3px;
+    font-weight: 500;
 }
 
 
-
-
-
-
-
-
-
-#new-commit{
-    width: 90%;
-    height: 60px;
+#new-commit {
+    width: 60%;
+    height: 50px;
     background: none;
     border: 1px solid #38383a79;
- 
-    border-radius: 5px;
-    
-    font-size: 25px;
+    border-radius: 100px;
+    font-size: 20px;
     font-weight: 400px;
-   
-
+    cursor: pointer;
+    margin-top: 30px;
 }
 
 
-.commit-card-container{
+.commit-card-container {
     width: 100%;
-  
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    margin-top: 380px;
+    padding-bottom: 50px;
 }
 
-.syntax-card{
+.syntax-card {
     width: 80%;
-  
     margin: auto;
-
-   margin-top: 20px;
-  border: 1px solid black;
-  border-radius: 7px;
+    margin-top: 20px;
+    border: 1px solid;
+    border-radius: 7px;
 
 }
 
-.syntax-card h3{
-width: 60%;
+.syntax-card h3 {
+    width: 60%;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 500;
 
 }
 
-.syntax-card h4{
-    width: 20%;
+.syntax-card h4 {
+    width: 35%;
     margin: 0;
- padding-top: 10px;
+    padding-top: 13px;
     font-size: 14px;
     font-weight: 900;
-    border-right: 1px solid black;
+    border-right: 1px solid ;
     letter-spacing: -.5px;
-  
+
 }
 
-.commit-display{
+.commit-display {
     height: 80%;
-  
-   overflow: hidden;
+
+    overflow: hidden;
 }
 
-.highlighter{
+.highlighter {
     width: 100%;
     height: 170px;
-  
+
     text-align: left;
     text-indent: 7px;
-   
-overflow-y: hidden;
-margin: 0;
-padding: 0;
 
- 
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+
+
 }
 
-.commit-button-container{
-    width: 40%;
+.commit-button-container {
+    width: 30%;
+    height: 45px;
     display: flex;
     justify-content: space-around;
+    padding: 10px;
 
-  
 }
 
-.commit-button{
-    width: 50%;
- border: none;
- background: none;
-text-align: center;
-
-color: white;
-font-size: 16px;
-font-weight: 500;
-
-cursor: pointer;
+.commit-button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: none;
+    text-align: center;
+    border-radius: 150px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    padding: 1.5px;
  
-display: flex;
-justify-content: center;
-align-items: center;
 }
 
-#delete{
+#delete {
     background-color: #A56262;
 }
 
 #edit{
-    width: 100%;
-    background-color: #e3b380f8;
+    background-color: #d58b0a;
+   
 }
-.link{
-    width: 50%;
-  }
 
-.commit-icon{
-    width: 35px;
-    height: 35px;
-    border:  1.5px solid rgb(255, 255, 255);
-  border-radius: 300px;
+.commit-icon {
+    width: 100%;
+    height: 45px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -235,11 +219,11 @@ align-items: center;
     margin-bottom: 5px;
     margin-left: 0px;
     margin-right: 0px;
-
+    background-color: rgb(21, 146, 255);
 }
 
-.commit-button img{
-   width: 65%;
-margin: 0px;
-  
+.commit-button img {
+    width: 65%;
+    margin: 0px;
+
 }

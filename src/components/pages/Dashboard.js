@@ -24,7 +24,8 @@ const Dashboard = ({
     newPShowToggle,
     theme,
     groupSelect,
-    setGroupSelect
+    setGroupSelect,
+    userId
 
 }) => {
 
@@ -37,7 +38,7 @@ const Dashboard = ({
             .then(r => r.json())
             .then(item => {
                 setAllUsers(item)
-
+                console.log("Here we go")
             })
     }, [])
 
@@ -68,7 +69,9 @@ const Dashboard = ({
                 editer={editer}
                 currentLang={currentLang}
                 theme={theme}
+                userId={userId}
             />
+            
         </div>
     )
 

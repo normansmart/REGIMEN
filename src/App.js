@@ -8,6 +8,7 @@ import GroupAddForm from './components/assets/GroupAddForm';
 import ProjectAddForm from './components/assets/ProjectAddForm';
 import Settings from './components/assets/Settings';
 import Dashboard from './components/pages/Dashboard';
+import ExplorePage from './components/pages/Explore';
 import SideBar from './components/assets/SideBar';
 import './App.css';
 import './components/css/onboarding.css'
@@ -19,11 +20,11 @@ import CommitField from './components/assets/CommitAdder';
 
 function App() {
 
-  
+
   const [currentUserId, setCurrentUserId] = useState(null)
   //Show login or sign up screen
-  const [signUpShow , setSignUpShow] = useState(false)
-  const [signInShow , setSignInShow] = useState(true)
+  const [signUpShow, setSignUpShow] = useState(false)
+  const [signInShow, setSignInShow] = useState(true)
 
   //
   const [onBoardGroupShow, setOnBoardGroupShow] = useState(true)
@@ -31,12 +32,12 @@ function App() {
   const [onBoardThemeSelect, setOnBoardThemeSelect] = useState(true)
   const [onBoarded, setOnBoarded] = useState(false)
   const [userSettings, setUserSettings] = useState({
-    user_id:currentUserId,
-    backgroundcolor: "#FFF9F2" , 
-    font: "Mulish" ,
+    user_id: currentUserId,
+    backgroundcolor: "#FFF9F2",
+    font: "Mulish",
     color: "#38383A"
 
-})
+  })
 
 
   const [newProject, setNewProject] = useState({})
@@ -51,7 +52,7 @@ function App() {
   const [groupSelect, setGroupSelect] = useState(0)
 
 
-//User login and tab information
+  //User login and tab information
 
   const [user, setUser] = useState({})
   const [userProjects, setUserProjects] = useState([])
@@ -115,9 +116,9 @@ function App() {
   //     })
   // }, [])
 
- 
-  
- 
+
+
+
 
   function refresh() {
     console.log(currentUserId)
@@ -135,10 +136,10 @@ function App() {
         setUserCohorts(myCohorts)
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
-      //  if(myTheme){
-      //   setUserSettings(myTheme)
-      //  }
-      setUserSettings(myTheme)
+         if(myTheme){
+          setUserSettings(myTheme)
+         }
+        // setUserSettings(myTheme)
 
       })
 
@@ -173,7 +174,7 @@ function App() {
 
 
 
-  function assignNewProject(project , group){
+  function assignNewProject(project, group) {
 
     console.log(project)
     fetch("/assignments", {
@@ -200,7 +201,7 @@ function App() {
   }
 
 
-  function createNewProject(e, group){
+  function createNewProject(e, group) {
     console.log(group)
     e.preventDefault();
     fetch("/projects", {
@@ -222,13 +223,13 @@ function App() {
     }
     ).then(r => r.json())
       .then(i => {
-        assignNewProject(i , group)
+        assignNewProject(i, group)
       })
   }
 
   //  useEffect( () => {
   //      refresh()
-       
+
   //   } , [])
 
 
@@ -345,10 +346,10 @@ function App() {
         }
       )
     }
-    ).then(r=> r.json())
-    .then(item=>{
-      handleUpdateItem(item)
-    })
+    ).then(r => r.json())
+      .then(item => {
+        handleUpdateItem(item)
+      })
 
 
 
@@ -429,7 +430,7 @@ function App() {
     }
     ).then(r => r.json())
       .then(i => {
-     
+
         addMembership(i)
         setOnBoardGroupShow(false)
 
@@ -455,12 +456,14 @@ function App() {
     }
     ).then(r => r.json())
       .then(i => {
-        refresh()
+      //  handleRefresh(i)
+      console.log("Just to make sure")
+        console.log(i)
       })
   }
 
-  function themeSetter(theme){
-   
+  function themeSetter(theme) {
+
     fetch(`/settings`, {
       method: 'POST',
       headers: {
@@ -468,22 +471,22 @@ function App() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
-       
-       theme
-        
+
+        theme
+
       )
     }
     )
-    .then(r => r.json())
-    .then(t =>{
-      setUserSettings(t)
-    })
+      .then(r => r.json())
+      .then(t => {
+        setUserSettings(t)
+      })
   }
 
 
-  function themeSelect(theme){
+  function themeSelect(theme) {
     console.log(userSettings)
-    
+
     fetch(`/settings/${userSettings.id}`, {
       method: 'PATCH',
       headers: {
@@ -492,7 +495,7 @@ function App() {
       },
       body: JSON.stringify(
         {
-          user_id: currentUserId ,
+          user_id: currentUserId,
           backgroundcolor: theme.backgroundcolor,
           color: theme.color,
           font: theme.font,
@@ -500,18 +503,18 @@ function App() {
       )
     }
     ).then(r => r.json())
-    .then(t =>{
- 
-    
-     setUserSettings(t)
-    
-     console.log(t)
-    })
+      .then(t => {
+
+
+        setUserSettings(t)
+
+        console.log(t)
+      })
 
   }
 
 
-  function finishOnboard(){
+  function finishOnboard() {
     setOnBoardThemeSelect(false)
 
     fetch(`/users/${currentUserId}`, {
@@ -521,66 +524,70 @@ function App() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
-        
-    {
-      username: user.username,
-      password_digest: user.password,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      onboarded: true
 
-    }
-        
+        {
+          username: user.username,
+          password_digest: user.password,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          onboarded: true
+
+        }
+
       )
     }
     ).then(r => r.json())
-    .then(t =>{
- 
-    console.log(t)
+      .then(t => {
 
-    setOnBoarded(true)
+        console.log(t)
 
-    })
-  
+        setOnBoarded(true)
+
+      })
+
   }
 
 
-function hideSignUp(){
-  setSignUpShow(false)
-  setSignInShow(false)
+  function hideSignUp() {
+    setSignUpShow(false)
+    setSignInShow(false)
 
-}
+  }
 
-function showSignUp(){
-  setSignUpShow(true)
-}
+  function showSignUp() {
+    setSignUpShow(true)
+  }
 
 
-function logout() {
-  console.log('logging out')
-  fetch("/logout", {
-    method: "DELETE"
-  })
-  setCurrentUserId(null)
- window.location.reload();
-}
+  function logout() {
+    console.log('logging out')
+    fetch("/logout", {
+      method: "DELETE"
+    })
+    setCurrentUserId(null)
+    window.location.reload();
+  }
 
+
+  const width = "50%"
+  const userTabH2= "30px"
+  const userTabFriends = "20px"
   return (
-    <div className="App" style={userSettings? { fontFamily: userSettings.font , backgroundColor: userSettings.backgroundcolor , color: userSettings.color} : console.log("User not here")}>
+    <div className="App" style={userSettings ? { fontFamily: userSettings.font, backgroundColor: userSettings.backgroundcolor, color: userSettings.color } : console.log("User not here")}>
+  
+      <div className='onboarding-container' style={onBoarded ? { display: "none", zIndex: -10 } : { display: "flex", zIndex: 80 }}>
 
-      <div className='onboarding-container' style={onBoarded ? {display:"none" , zIndex: -10}:{display: "flex" , zIndex:80}}>
-
-        <div className='onboard-screen' id='ob1' style={onBoardGroupShow ? { display: "flex" , backgroundColor:userSettings.backgroundcolor } : { display: "none" }}>
+        <div className='onboard-screen' id='ob1' style={onBoardGroupShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }}>
           <GroupAddForm onboardGroup={onBoardGroupAdd} />
         </div>
 
-        <div className='onboard-screen' id='ob2' style={onBoardProjectShow ? { display: "flex", backgroundColor:userSettings.backgroundcolor } : { display: "none" } }>
+        <div className='onboard-screen' id='ob2' style={onBoardProjectShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }}>
           <ProjectAddForm post={createProject} groups={userCohorts} />
         </div>
 
-        <div className='onboard-screen' id='ob3' style={onBoardThemeSelect ? { display: "block", backgroundColor:"#FFF9F2" } : { display: "none" }} >
-          <Settings themeSelect={themeSetter} userid={currentUserId ? currentUserId : console.log("no user active")} currentTheme={userSettings} style={onBoardProjectShow ? { display: "flex", backgroundColor:userSettings.backgroundcolor } : { display: "none" }} id="obj3-L" />
-          <button className='get-started' onClick={()=> finishOnboard()}> Get Started </button>
+        <div className='onboard-screen' id='ob3' style={onBoardThemeSelect ? { display: "block", backgroundColor: "#FFF9F2" } : { display: "none" }} >
+          <Settings themeSelect={themeSetter} userid={currentUserId ? currentUserId : console.log("no user active")} currentTheme={userSettings} style={onBoardProjectShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }} id="obj3-L" />
+          <button className='get-started' onClick={() => finishOnboard()}> Get Started </button>
         </div>
 
       </div>
@@ -591,11 +598,36 @@ function logout() {
       <Router>
 
         <div className='navigation-container'>
-          <UserTab user={user} myprojects={userProjects} mycohorts={userCohorts} mycommits={userCommits} mycolleagues={userColleagues} />
+          <UserTab user={user} myprojects={userProjects} mycohorts={userCohorts} mycommits={userCommits} mycolleagues={userColleagues} width={width} h2Size={userTabH2} />
           <Navigation currentUserId={currentUserId} logout={logout} />
         </div>
 
         <Routes>
+          <Route path="/explore" element={<ExplorePage  
+          sideSelect={sidebarSetter}   
+          selectedProject={selectedProject}
+          sideBarToggle={sideBarShow}
+          switcher={sideBarHide}
+          commits={commits}
+          declare={addCommit}
+          editer={handleEditCommit}
+          deleter={handleDelete}
+          setLang={setLanguage}
+          currentLang={currentLang}
+          groups={userCohorts}
+          post={createNewProject}
+          newProject={showProjectForm}
+          newPShowToggle={newProjectShow}
+          theme={userSettings}
+          groupSelect={groupSelect}
+          setGroupSelect={setGroupSelect}
+          userId={currentUserId} 
+          user={user} 
+          groupAssign={addMembership} 
+          h2Size={userTabFriends} />} />
+
+
+
 
           <Route path="/" exact element={
             <Dashboard projects={userProjects}
@@ -616,6 +648,7 @@ function logout() {
               theme={userSettings}
               groupSelect={groupSelect}
               setGroupSelect={setGroupSelect}
+              userId={currentUserId}
             />
           } />
 
@@ -624,6 +657,8 @@ function logout() {
               setLang={setLanguage}
               currentLang={currentLang}
               selectedProject={selectedProject}
+              theme={userSettings}
+
             />} />
 
           <Route path='/commitedit' element={
@@ -634,10 +669,11 @@ function logout() {
               currentLang={currentLang}
               selectedProject={selectedProject}
               commitEdit={editCommit}
-            />} 
-            />
+              theme={userSettings}
+            />}
+          />
 
-            <Route path='/settings' element={ <Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
+          <Route path='/settings' element={<Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
 
         </Routes>
       </Router>

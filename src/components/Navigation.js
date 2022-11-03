@@ -18,8 +18,8 @@ const Navigation = ({currentUserId, logout}) => {
         <nav>
             <ul>
             <Link className="link" to='/'> <li> Dashboard</li> </Link>
-                <Link className="link" to='/declaration'> <li> Work Space</li></Link>
-                <li> Groups </li>
+                <Link className="link" to='/declaration'> <li> Workstation</li></Link>
+                <Link className="link" to='/explore'>   <li> Explore </li> </Link>
                 <Link className="link" to='/settings'> <li> Settings </li> </Link>
                 <LogoutButton className="logoutButton" currentUserId={currentUserId} logout={logout}/>
             </ul>

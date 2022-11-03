@@ -3,6 +3,7 @@
     height: calc(100vh - 120px);
     margin: auto;
     margin-top: 120px;
+    position: relative;
 }
 
 
@@ -59,9 +60,12 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
     margin: auto;
     box-sizing: border-box;
-    padding-bottom: 150px;
+    padding-bottom: 120px;
+
   
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -70,14 +74,14 @@
 
 
 .project-card {
-    width: 20%;
-    height: 220px;
-    margin: 2.5%;
+    /* width: 300px;
+    height: 210px; */
+    margin: 2%;
     border-radius: 25px;
     /* background-image: linear-gradient(#FFFBF6, #fff0dd); */
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.272);
     cursor: pointer;
-
+    padding: 50px;
 }
 
 
@@ -90,22 +94,19 @@
 
 
 .project-card h1 {
+    width: 100%;
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
+    padding-top: 20px;
     font-size: 22px;
     font-weight: 900;
-
     border-top: 1px solid #38383a77;
-
 }
 
 .project-card p {
-    width: 80%;
+    width: 100%;
     font-size: 20px;
     font-weight: 500;
-    margin: auto;
+  
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: left;
@@ -114,11 +115,9 @@
 .project-add-container{
     width: 100%;
     height: 100vh;
-
     position: absolute;
     top: 0;
     left: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
