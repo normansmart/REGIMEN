@@ -26,7 +26,8 @@ const ExplorePage = ({
     setGroupSelect,
     userId,
     user,
-    groupAssign, }) => {
+    groupAssign,
+myFriends }) => {
 
     const [allProjects, setAllProjects] = useState([])
     const [allCohorts, setAllCohorts] = useState([])
@@ -36,15 +37,16 @@ const ExplorePage = ({
     const [showGroups, setShowGroups] = useState(false)
     const [showUsers, setShowUsers] = useState(false)
     const width = "100%"
-    const userTab = "18px"
+    const userTab = "20px"
     console.log(showProjects)
-            console.log(showGroups)
-            console.log(showUsers)
+    console.log(showGroups)
+    console.log(showUsers)
     useEffect(() => {
         fetchProjectData()
         fetchGroupData()
         fetchUserData()
     }, [])
+
     console.log(allProjects)
     function fetchProjectData() {
         fetch("/projects")
@@ -83,7 +85,7 @@ const ExplorePage = ({
             console.log(showGroups)
             console.log(showUsers)
         } else if (page === "groups") {
-           
+
             setShowProjects(false)
             setShowGroups(true)
             setShowUsers(false)
@@ -101,26 +103,52 @@ const ExplorePage = ({
 
     }
 
+
+    function assignFriends(otherUser) {
+        fetch("/friends", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    user_id: userId,
+                    friend_id: otherUser.id
+                }
+            )
+        })
+     
+handleUserUpdate(otherUser)
+    }
+
+    function handleUserUpdate(user){
+        const updatedItems = allUsers.filter((item) => item.id !== user.id);
+        console.log(updatedItems)
+        setAllUsers(updatedItems);
+    }
+
+
     return (
         <div className="explore-container">
-            <div className="explore-nav" style={{ backgroundColor: `${theme.backgroundcolor}CC` , borderBottom:`1px solid ${theme.color}66 `}}>
+            <div className="explore-nav" style={{ backgroundColor: `${theme.backgroundcolor}CC`, borderBottom: `1px solid ${theme.color}66 ` }}>
                 <ul>
-                    <li onClick={() => showPage("projects")} style={showProjects ? {backgroundColor: theme.color , color: theme.backgroundcolor} : {backgroundColor: theme.backgroundcolor , color: theme.color}} > Projects</li>
-                    <li onClick={() => showPage("groups")} style={showGroups ? {backgroundColor: theme.color , color: theme.backgroundcolor} : {backgroundColor: theme.backgroundcolor , color: theme.color}}> Groups</li>
-                    <li onClick={() => showPage("users")} style={showUsers ? {backgroundColor: theme.color , color: theme.backgroundcolor} : {backgroundColor:theme.backgroundcolor, color: theme.color}}> Users</li>
+                    <li onClick={() => showPage("projects")} style={showProjects ? { backgroundColor: theme.color, color: theme.backgroundcolor } : { backgroundColor: theme.backgroundcolor, color: theme.color }} > Projects</li>
+                    <li onClick={() => showPage("groups")} style={showGroups ? { backgroundColor: theme.color, color: theme.backgroundcolor } : { backgroundColor: theme.backgroundcolor, color: theme.color }}> Groups</li>
+                    <li onClick={() => showPage("users")} style={showUsers ? { backgroundColor: theme.color, color: theme.backgroundcolor } : { backgroundColor: theme.backgroundcolor, color: theme.color }}> Users</li>
                 </ul>
             </div>
 
-            <div className="project-tab-container" style={showProjects ? { display: "flex" , paddingTop:"80px"} : { display: "none" , paddingTop:"80px"}}>
+            <div className="project-tab-container" style={showProjects ? { display: "flex", paddingTop: "80px" } : { display: "none", paddingTop: "80px" }}>
                 <ProjectList projects={allProjects} sideSelect={sideSelect} />
             </div>
 
             <div className="group-tab-container" style={showGroups ? { display: "inline-block" } : { display: "none" }}>
-                <GroupList groups={allCohorts} theme={theme} userId={userId} user={user} groupAssign={groupAssign} fetchGroupData={fetchGroupData} />
+                <GroupList groups={allCohorts} theme={theme} userId={userId} user={user}  />
             </div>
 
             <div className="user-tab-container" style={showUsers ? { display: "flex" } : { display: "none" }}>
-                <UserList users={allUsers} user={user} width={width} theme={theme} h2Size={userTab} />
+                <UserList users={allUsers} user={user} width={width} theme={theme} h2Size={userTab} addFriend={assignFriends}  myFriends={myFriends}  />
             </div>
 
             <SideBar

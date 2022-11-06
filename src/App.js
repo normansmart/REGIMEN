@@ -49,6 +49,7 @@ function App() {
   const [sideBarShow, setSideBarShow] = useState(false)
   const [currentLang, setCurrentLang] = useState("")
   const [newProjectShow, setNewProjectShow] = useState(false)
+  const [newGroupShow, setNewGroupShow] = useState(false)
   const [groupSelect, setGroupSelect] = useState(0)
 
 
@@ -73,7 +74,7 @@ function App() {
         const myTheme = user.setting
         const myColleagues = user.friends
         const onBoarded = user.onboarded
-        const groupSelectorDefault = myCohorts[0].id
+
 
         setUser(user)
         setUserProjects(myProjects)
@@ -81,20 +82,25 @@ function App() {
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
         setOnBoarded(onBoarded)
-        setGroupSelect(groupSelectorDefault)
-        setUserSettings(myTheme)
-        refresh()
+
+        if (myTheme) {
+          setUserSettings(myTheme)
+        }
+
+
       })
   }
 
   console.log(userSettings)
 
 
-
   function showProjectForm() {
     setNewProjectShow(!newProjectShow)
   }
 
+  function showGroupForm(){
+    setNewGroupShow(!newGroupShow)
+  }
 
   // useEffect(() => {
   //   fetch("/me")
@@ -136,9 +142,9 @@ function App() {
         setUserCohorts(myCohorts)
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
-         if(myTheme){
+        if (myTheme) {
           setUserSettings(myTheme)
-         }
+        }
         // setUserSettings(myTheme)
 
       })
@@ -167,7 +173,7 @@ function App() {
       .then(i => {
         console.log(i)
         refresh()
-
+        setOnBoardProjectShow(false)
       })
 
   }
@@ -177,6 +183,7 @@ function App() {
   function assignNewProject(project, group) {
 
     console.log(project)
+    console.log(group)
     fetch("/assignments", {
       method: 'POST',
       headers: {
@@ -195,7 +202,6 @@ function App() {
       .then(i => {
         console.log(i)
         refresh()
-
       })
 
   }
@@ -224,6 +230,7 @@ function App() {
     ).then(r => r.json())
       .then(i => {
         assignNewProject(i, group)
+
       })
   }
 
@@ -235,7 +242,7 @@ function App() {
 
 
   function createProject(e) {
-
+console.log("working fine here")
     e.preventDefault();
     fetch("/projects", {
       method: 'POST',
@@ -257,7 +264,7 @@ function App() {
     ).then(r => r.json())
       .then(i => {
         assignProject(i)
-        setOnBoardProjectShow(false)
+
       })
 
   }
@@ -406,8 +413,44 @@ function App() {
 
   }
 
-
+function test(e){
+  e.preventDefault();
+  console.log(e)
+}
   function onBoardGroupAdd(e) {
+    e.preventDefault();
+    console.log("cohort added")
+
+    fetch("/cohorts", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          name: e.target.name.value,
+          tag: e.target.tag.value,
+          message: e.target.message.value,
+          admin_id: currentUserId,
+          join_key: e.target.join_key.value,
+          private: true
+
+        }
+      )
+    }
+    ).then(r => r.json())
+      .then(i => {
+        console.log(i)
+        addMembership(i)
+        setUserCohorts([i, ...userCohorts])
+        setGroupSelect(i.id)
+       
+      })
+  }
+
+
+  function createNewGroup(e) {
     console.log("cohort added")
     e.preventDefault();
     fetch("/cohorts", {
@@ -430,10 +473,9 @@ function App() {
     }
     ).then(r => r.json())
       .then(i => {
-
+        console.log(i)
         addMembership(i)
-        setOnBoardGroupShow(false)
-
+        setUserCohorts([i, ...userCohorts])
       })
   }
 
@@ -456,10 +498,12 @@ function App() {
     }
     ).then(r => r.json())
       .then(i => {
-      //  handleRefresh(i)
-      console.log("Just to make sure")
+        //  handleRefresh(i)
+        setOnBoardGroupShow(false)
+      
         console.log(i)
       })
+
   }
 
   function themeSetter(theme) {
@@ -543,6 +587,7 @@ function App() {
 
         setOnBoarded(true)
 
+
       })
 
   }
@@ -570,11 +615,11 @@ function App() {
 
 
   const width = "50%"
-  const userTabH2= "30px"
+  const userTabH2 = "30px"
   const userTabFriends = "20px"
   return (
     <div className="App" style={userSettings ? { fontFamily: userSettings.font, backgroundColor: userSettings.backgroundcolor, color: userSettings.color } : console.log("User not here")}>
-  
+
       <div className='onboarding-container' style={onBoarded ? { display: "none", zIndex: -10 } : { display: "flex", zIndex: 80 }}>
 
         <div className='onboard-screen' id='ob1' style={onBoardGroupShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }}>
@@ -585,9 +630,9 @@ function App() {
           <ProjectAddForm post={createProject} groups={userCohorts} />
         </div>
 
-        <div className='onboard-screen' id='ob3' style={onBoardThemeSelect ? { display: "block", backgroundColor: "#FFF9F2" } : { display: "none" }} >
+        <div className='onboard-screen' id='ob3' style={onBoardThemeSelect ? { display: "block", backgroundColor: userSettings.backgroundcolor } : { display: "none" }} >
           <Settings themeSelect={themeSetter} userid={currentUserId ? currentUserId : console.log("no user active")} currentTheme={userSettings} style={onBoardProjectShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }} id="obj3-L" />
-          <button className='get-started' onClick={() => finishOnboard()}> Get Started </button>
+          <button className='get-started' style={{ backgroundColor: userSettings.color, color: userSettings.backgroundcolor }} onClick={() => finishOnboard()}> Get Started </button>
         </div>
 
       </div>
@@ -597,34 +642,35 @@ function App() {
 
       <Router>
 
-        <div className='navigation-container'>
+        <div className='navigation-container' >
           <UserTab user={user} myprojects={userProjects} mycohorts={userCohorts} mycommits={userCommits} mycolleagues={userColleagues} width={width} h2Size={userTabH2} />
-          <Navigation currentUserId={currentUserId} logout={logout} />
+          <Navigation currentUserId={currentUserId} logout={logout} style={userSettings} />
         </div>
 
         <Routes>
-          <Route path="/explore" element={<ExplorePage  
-          sideSelect={sidebarSetter}   
-          selectedProject={selectedProject}
-          sideBarToggle={sideBarShow}
-          switcher={sideBarHide}
-          commits={commits}
-          declare={addCommit}
-          editer={handleEditCommit}
-          deleter={handleDelete}
-          setLang={setLanguage}
-          currentLang={currentLang}
-          groups={userCohorts}
-          post={createNewProject}
-          newProject={showProjectForm}
-          newPShowToggle={newProjectShow}
-          theme={userSettings}
-          groupSelect={groupSelect}
-          setGroupSelect={setGroupSelect}
-          userId={currentUserId} 
-          user={user} 
-          groupAssign={addMembership} 
-          h2Size={userTabFriends} />} />
+          <Route path="/explore" element={<ExplorePage
+            sideSelect={sidebarSetter}
+            selectedProject={selectedProject}
+            sideBarToggle={sideBarShow}
+            switcher={sideBarHide}
+            commits={commits}
+            declare={addCommit}
+            editer={handleEditCommit}
+            deleter={handleDelete}
+            setLang={setLanguage}
+            currentLang={currentLang}
+            groups={userCohorts}
+            post={createNewProject}
+            newProject={showProjectForm}
+            newPShowToggle={newProjectShow}
+            theme={userSettings}
+            groupSelect={groupSelect}
+            setGroupSelect={setGroupSelect}
+            userId={currentUserId}
+            user={user}
+            groupAssign={addMembership}
+            h2Size={userTabFriends}
+            myFriends={userColleagues} />} />
 
 
 
@@ -649,6 +695,11 @@ function App() {
               groupSelect={groupSelect}
               setGroupSelect={setGroupSelect}
               userId={currentUserId}
+              newGroup={showGroupForm}
+              groupAdder={createNewGroup}
+              groupSwitch={showGroupForm}
+              groupToggle={newGroupShow}
+
             />
           } />
 

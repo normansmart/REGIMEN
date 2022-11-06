@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import UserCard from "./UserCard";
 
-function UserList({ users, theme, userId, user, groupAssign, fetchGroupData , width , h2Size }) {
+function UserList({ users, theme, userId, width, h2Size, addFriend, myFriends }) {
 
-
+    console.log(myFriends)
 
     const userList = users.map(
 
         item => {
 
-            if(( item.id === user.id)) {
-              
-              console.log("that's ma")
+            if ((item.id === userId)) {
+
+                console.log("that's me")
 
             }
-            else {
+            else if (myFriends.some(friend => friend.id == item.id)) {
+                console.log("no friends here")
+
+            } else {
+               
                 return (
                     <>
-                    <UserCard user={item} width={width} theme={theme} h2Size={h2Size}/>
+                        <UserCard user={item} width={width} theme={theme} h2Size={h2Size} addFriend={addFriend} />
                     </>
                 )
-
             }
         }
     )
@@ -52,9 +55,9 @@ function UserList({ users, theme, userId, user, groupAssign, fetchGroupData , wi
              
             </div> */}
 
-           
+
             {userList}
-            
+
         </>
     )
 }

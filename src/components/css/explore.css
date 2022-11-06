@@ -104,22 +104,22 @@
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     overflow-y: scroll;
     scroll-behavior: smooth;
     box-sizing: border-box;
     padding-bottom: 100px;
     padding-top: 80px;
     position: relative;
-   
+
 }
 
 
 .user-card {
-width: 600px;
+    width: 600px;
     height: 190px;
     position: relative;
-    background-color: black;
+
     margin-top: 20px;
     margin-bottom: 20px;
 }

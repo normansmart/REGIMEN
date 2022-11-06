@@ -20,7 +20,7 @@ function SideBar({ selectedProject, toggle, switcher, commits, deleter, editer, 
 
     const allUsers = selectedProject.users
     const group = selectedProject.cohort
-    console.log(selectedProject)
+  
 
 
     const commitCards = commits.map(
@@ -38,9 +38,6 @@ function SideBar({ selectedProject, toggle, switcher, commits, deleter, editer, 
             )
         }
     )
-
-    console.log(selectedProject)
-
 
 
     return (
