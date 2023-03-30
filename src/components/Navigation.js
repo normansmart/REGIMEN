@@ -12,10 +12,9 @@ const Navigation = ({ currentUserId, logout, style }) => {
       return <button className="logout-button" onClick={()=>logout()}> <img src={image} /> </button>
     }
     else {
-      return <></>
+    console.log("no user")
     }
   }
-
 
   return (
     <nav>
@@ -29,6 +28,4 @@ const Navigation = ({ currentUserId, logout, style }) => {
     </nav>
   )
 }
-
-
 export default Navigation 

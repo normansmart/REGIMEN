@@ -11,7 +11,9 @@ const SignUp = ({onLogin, currentUserId,  setShow , hide}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('creating user...')
-
+        var profile = e.target.image.files[0]
+        var profileUrl = URL.createObjectURL(profile)
+        console.log(profileUrl)
         fetch("/signup", {
             method: "POST",
             headers: {
@@ -23,7 +25,7 @@ const SignUp = ({onLogin, currentUserId,  setShow , hide}) => {
               password: e.target.password.value,
               first_name: e.target.first_name.value,
               last_name: e.target.last_name.value,
-        
+                image: {profileUrl}
             }),
         })
         .then(r => r.json())
@@ -44,7 +46,7 @@ const SignUp = ({onLogin, currentUserId,  setShow , hide}) => {
                 <input type="text" name="last_name" placeholder="Last Name" /><br/>
                 <input type="text" name="username" placeholder="Username" /><br/>
                 <input type="text" name="password" placeholder="Password" /><br/>
-
+                <input type="file" name="image" />
                 <button id="sign-up-button"
                     type="submit"
                     name="submit"

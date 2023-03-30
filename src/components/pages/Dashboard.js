@@ -33,11 +33,7 @@ const Dashboard = ({
     groupToggle,
 
 }) => {
-
     const [allUsers, setAllUsers] = useState([])
-
-
-
     useEffect(() => {
         fetch("/users")
             .then(r => r.json())
@@ -46,8 +42,6 @@ const Dashboard = ({
                 console.log("Here we go")
             })
     }, [])
-
-
 
 
     return (

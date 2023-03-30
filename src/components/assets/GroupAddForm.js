@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-function GroupAddForm(groupAdder){
+function GroupAddForm({groupAdder}){
 console.log(groupAdder)
     return(
         

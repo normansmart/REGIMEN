@@ -92,7 +92,7 @@ function App() {
   }
 
   console.log(userSettings)
-
+console.log(user)
 
   function showProjectForm() {
     setNewProjectShow(!newProjectShow)
@@ -152,7 +152,6 @@ function App() {
   }
 
 
-
   function assignProject(project) {
     console.log(project)
     fetch("/assignments", {
@@ -181,7 +180,6 @@ function App() {
 
 
   function assignNewProject(project, group) {
-
     console.log(project)
     console.log(group)
     fetch("/assignments", {
@@ -317,11 +315,8 @@ console.log("working fine here")
         setUserCohorts(myGroups)
         setUserCommits(myCommits)
         setUserColleagues(myColleagues)
-
       })
-
     setCommits([commit, ...commits])
-
   }
 
 
@@ -349,7 +344,6 @@ console.log("working fine here")
           title: e.target.title.value,
           language: e.target.langSelect.value,
           commit: e.target.commit.value
-
         }
       )
     }
@@ -357,9 +351,6 @@ console.log("working fine here")
       .then(item => {
         handleUpdateItem(item)
       })
-
-
-
   }
 
 
@@ -386,20 +377,15 @@ console.log("working fine here")
   }
   //DELETE COMMIT rerender
   function handleDeleteUpdate(commit) {
-    const updatedItems = commits.filter((item) => item.id !== commit.id);
+    const updatedItems = commits.filter((item) => item.id !== commit.id)
     console.log(updatedItems)
-    setCommits(updatedItems);
+    setCommits(updatedItems)
   }
 
-
   function sidebarSetter(item) {
-
     setSelectedProject(item)
     setCommits(item.commits)
-
-
     setSideBarShow(true)
-
   }
 
 
@@ -410,7 +396,6 @@ console.log("working fine here")
   function setLanguage(e) {
     setCurrentLang(e.target.value)
     console.log(currentLang)
-
   }
 
 function test(e){
@@ -435,7 +420,6 @@ function test(e){
           admin_id: currentUserId,
           join_key: e.target.join_key.value,
           private: true
-
         }
       )
     }
@@ -445,7 +429,6 @@ function test(e){
         addMembership(i)
         setUserCohorts([i, ...userCohorts])
         setGroupSelect(i.id)
-       
       })
   }
 
@@ -481,7 +464,6 @@ function test(e){
 
 
   function addMembership(group) {
-
     console.log("member assigned")
     fetch("/memberships", {
       method: 'POST',
@@ -500,10 +482,8 @@ function test(e){
       .then(i => {
         //  handleRefresh(i)
         setOnBoardGroupShow(false)
-      
         console.log(i)
       })
-
   }
 
   function themeSetter(theme) {
@@ -515,9 +495,7 @@ function test(e){
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
-
         theme
-
       )
     }
     )
@@ -527,10 +505,8 @@ function test(e){
       })
   }
 
-
   function themeSelect(theme) {
     console.log(userSettings)
-
     fetch(`/settings/${userSettings.id}`, {
       method: 'PATCH',
       headers: {
@@ -548,13 +524,9 @@ function test(e){
     }
     ).then(r => r.json())
       .then(t => {
-
-
         setUserSettings(t)
-
         console.log(t)
       })
-
   }
 
 
@@ -568,41 +540,31 @@ function test(e){
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
-
         {
           username: user.username,
           password_digest: user.password,
           first_name: user.first_name,
           last_name: user.last_name,
           onboarded: true
-
         }
-
       )
     }
     ).then(r => r.json())
       .then(t => {
-
         console.log(t)
-
         setOnBoarded(true)
-
-
       })
 
   }
 
-
   function hideSignUp() {
     setSignUpShow(false)
     setSignInShow(false)
-
   }
 
   function showSignUp() {
     setSignUpShow(true)
   }
-
 
   function logout() {
     console.log('logging out')
@@ -623,7 +585,7 @@ function test(e){
       <div className='onboarding-container' style={onBoarded ? { display: "none", zIndex: -10 } : { display: "flex", zIndex: 80 }}>
 
         <div className='onboard-screen' id='ob1' style={onBoardGroupShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }}>
-          <GroupAddForm onboardGroup={onBoardGroupAdd} />
+          <GroupAddForm groupAdder={onBoardGroupAdd} />
         </div>
 
         <div className='onboard-screen' id='ob2' style={onBoardProjectShow ? { display: "flex", backgroundColor: userSettings.backgroundcolor } : { display: "none" }}>
@@ -660,20 +622,13 @@ function test(e){
             setLang={setLanguage}
             currentLang={currentLang}
             groups={userCohorts}
-            post={createNewProject}
-            newProject={showProjectForm}
-            newPShowToggle={newProjectShow}
             theme={userSettings}
             groupSelect={groupSelect}
-            setGroupSelect={setGroupSelect}
             userId={currentUserId}
             user={user}
             groupAssign={addMembership}
             h2Size={userTabFriends}
             myFriends={userColleagues} />} />
-
-
-
 
           <Route path="/" exact element={
             <Dashboard projects={userProjects}
@@ -699,7 +654,6 @@ function test(e){
               groupAdder={createNewGroup}
               groupSwitch={showGroupForm}
               groupToggle={newGroupShow}
-
             />
           } />
 
@@ -709,7 +663,6 @@ function test(e){
               currentLang={currentLang}
               selectedProject={selectedProject}
               theme={userSettings}
-
             />} />
 
           <Route path='/commitedit' element={
@@ -724,7 +677,7 @@ function test(e){
             />}
           />
 
-          <Route path='/settings' element={<Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} id="obj3-L" />} />
+          <Route path='/settings' element={<Settings themeSelect={themeSelect} userid={user.id} currentTheme={userSettings} user={user} id="obj3-L" />} />
 
         </Routes>
       </Router>

@@ -16,8 +16,6 @@ const Login = ({ onLogin, currentUserId, setTheme, themeDefault, setSignUp, show
       }
 
     const handleLogin = (e) => {
-
-
         e.preventDefault();
         console.log('logging in...')
         fetch("/login",
@@ -32,19 +30,16 @@ const Login = ({ onLogin, currentUserId, setTheme, themeDefault, setSignUp, show
                 }),
             })
             .then(res => res.json())
-            .then((user) => {
+            .then((user) => {   
                 // console.log(user.id)
 
 
-                if (user.id) {
-
+                if (user.id) { 
                     onLogin(user.id)
                     setTheme(user.id)
                 } else {
                     alert("Username or Password is incorrect")
                 }
-
-
 
             })
 
@@ -58,16 +53,14 @@ const Login = ({ onLogin, currentUserId, setTheme, themeDefault, setSignUp, show
                 <div className="login">
                     <img className="logo" src={image} />
                     <h2> REGIMEN </h2>
-
                     <form onSubmit={(e) => handleLogin(e)}>
                         <input type="text" name="username" placeholder="Username" /> <br />
                         <input type="password" name="password" placeholder="Password" id="passwordInput" /> <br />
                         <input type="checkbox" onClick={()=> showPasswordToggle()} id="passwordToggle" /> Show Password <br />
                         <button id="sign-in-button"
                             type="submit"
-                            name="submit"
-                            className="submit" >
-                            SIGN IN </button> <br />
+                            className="submit">
+                            SIGN IN </button> <br/>
                         <h2 style={{ margin: "0px", fontSize: "18px" }}> or</h2> <br />
                     </form>
 

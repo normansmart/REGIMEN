@@ -7,7 +7,7 @@ import UserList from "../assets/UserList";
 import "../css/explore.css"
 
 const ExplorePage = ({
-    projects,
+
     sideSelect,
     selectedProject,
     sideBarToggle,
@@ -17,17 +17,16 @@ const ExplorePage = ({
     editer,
     deleter,
     groups,
-    post,
+
     currentLang,
-    newProject,
-    newPShowToggle,
+
     theme,
     groupSelect,
     setGroupSelect,
     userId,
     user,
     groupAssign,
-myFriends }) => {
+    myFriends }) => {
 
     const [allProjects, setAllProjects] = useState([])
     const [allCohorts, setAllCohorts] = useState([])
@@ -118,11 +117,11 @@ myFriends }) => {
                 }
             )
         })
-     
-handleUserUpdate(otherUser)
+
+        handleUserUpdate(otherUser)
     }
 
-    function handleUserUpdate(user){
+    function handleUserUpdate(user) {
         const updatedItems = allUsers.filter((item) => item.id !== user.id);
         console.log(updatedItems)
         setAllUsers(updatedItems);
@@ -144,11 +143,11 @@ handleUserUpdate(otherUser)
             </div>
 
             <div className="group-tab-container" style={showGroups ? { display: "inline-block" } : { display: "none" }}>
-                <GroupList groups={allCohorts} theme={theme} userId={userId} user={user}  />
+                <GroupList groups={allCohorts} theme={theme} userId={userId} user={user} />
             </div>
 
             <div className="user-tab-container" style={showUsers ? { display: "flex" } : { display: "none" }}>
-                <UserList users={allUsers} user={user} width={width} theme={theme} h2Size={userTab} addFriend={assignFriends}  myFriends={myFriends}  />
+                <UserList users={allUsers} user={user} width={width} theme={theme} h2Size={userTab} addFriend={assignFriends} myFriends={myFriends} />
             </div>
 
             <SideBar
